@@ -1,0 +1,29 @@
+{
+  "id": "chart-b",
+  "label": "Chart B — Mumbai 1988-11-22 09:15 IST",
+  "system": "lahiri_whole_sign",
+  "toleranceDegrees": 0.5,
+  "input": {
+    "birthAt": "1988-11-22T09:15:00+05:30",
+    "lat": 19.076,
+    "lng": 72.8777,
+    "tz": "Asia/Kolkata",
+    "timeUnknown": false
+  },
+  "expected": {
+    "ayanamsa": 23.698,
+    "lagnaApproximate": false,
+    "placements": {
+      "sun": 216.3672,
+      "moon": 16.3696,
+      "mercury": 211.1259,
+      "venus": 184.5669,
+      "mars": 339.9584,
+      "jupiter": 37.4813,
+      "saturn": 247.3125,
+      "rahu": 316.1981,
+      "ketu": 136.1981,
+      "lagna": 68.0081
+    }
+  }
+}

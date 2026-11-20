@@ -1,0 +1,237 @@
+{
+  "flows": [
+    {
+      "app": "Moonly",
+      "name": "Onboarding",
+      "url": "https://mobbin.com/flows/992bc16a-8d0b-4961-8078-98e2e807a32a",
+      "screens": 18,
+      "group": "onboarding",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Moonly",
+      "name": "Onboarding + Subscribe",
+      "url": "https://mobbin.com/flows/87813e2f-8e67-4cd7-9510-7892c0676442",
+      "screens": 15,
+      "group": "paywall",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Moonly",
+      "name": "Calculate birth chart",
+      "url": "https://mobbin.com/flows/9ef67bb7-3a11-456f-8866-a38c8fa4b9ce",
+      "screens": 6,
+      "group": "chart",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Co-Star",
+      "name": "Onboarding",
+      "url": "https://mobbin.com/flows/ca4b6afb-f05a-462f-b9a7-ab026b438d39",
+      "screens": 14,
+      "group": "onboarding",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Calm",
+      "name": "Discover",
+      "url": "https://mobbin.com/flows/e3f9f96b-d21f-400c-a94f-39bc53f8f40c",
+      "screens": 6,
+      "group": "daily",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Calm",
+      "name": "Onboarding + Subscribe",
+      "url": "https://mobbin.com/flows/38549b00-2fe8-4fd1-914b-13c4905db245",
+      "screens": 10,
+      "group": "onboarding",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Calm",
+      "name": "Profile / Check-ins",
+      "url": "https://mobbin.com/flows/32f53762-649e-4ac9-b0dc-2bc8fd8cce70",
+      "screens": 6,
+      "group": "journal",
+      "verdict": "adopt"
+    },
+    {
+      "app": "ChatGPT",
+      "name": "Chat + voice",
+      "url": "https://mobbin.com/flows/ceb16aae-9055-4428-9f70-ce77791bb3c1",
+      "screens": 6,
+      "group": "lens",
+      "verdict": "adapt"
+    },
+    {
+      "app": "ChatGPT",
+      "name": "Chatting",
+      "url": "https://mobbin.com/flows/86f171f6-2b2c-498b-a76d-fd21dd493a10",
+      "screens": 7,
+      "group": "lens",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Headspace",
+      "name": "Onboarding + Subscribe",
+      "url": "https://mobbin.com/flows/31b21791-dec6-448a-8253-648f5ebbba3e",
+      "screens": 21,
+      "group": "paywall",
+      "verdict": "adopt"
+    },
+    {
+      "app": "Headspace",
+      "name": "Subscribing to premium",
+      "url": "https://mobbin.com/flows/ccf14439-4c45-4d56-b031-45173490cafe",
+      "screens": 10,
+      "group": "paywall",
+      "verdict": "adopt"
+    },
+    {
+      "app": "Headspace",
+      "name": "Subscription details",
+      "url": "https://mobbin.com/flows/f3815335-5ab5-41f4-9299-7d81f32340ab",
+      "screens": 2,
+      "group": "settings",
+      "verdict": "adopt"
+    },
+    {
+      "app": "Headspace",
+      "name": "Canceling subscription",
+      "url": "https://mobbin.com/flows/a2f8004c-5004-40b6-9f58-ed0953a391b7",
+      "screens": 6,
+      "group": "settings",
+      "verdict": "adapt"
+    }
+  ],
+  "screens": [
+    {
+      "app": "Claude",
+      "url": "https://mobbin.com/screens/ee3f2db4-079b-4034-8905-9938a40e8f0e",
+      "note": "Dark empty chat + serif greeting",
+      "group": "lens",
+      "verdict": "adopt"
+    },
+    {
+      "app": "Claude",
+      "url": "https://mobbin.com/screens/e502b32e-3771-49cd-b0db-92eeff96922e",
+      "note": "Composer with attachment",
+      "group": "lens",
+      "verdict": "adopt"
+    },
+    {
+      "app": "Claude",
+      "url": "https://mobbin.com/screens/d9622384-f754-4729-93c4-18217ee5ed19",
+      "note": "Active thread + stop gen",
+      "group": "lens",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Claude",
+      "url": "https://mobbin.com/screens/d5083442-9103-4ab3-9af8-8f71f480827f",
+      "note": "Dawn empty state",
+      "group": "lens",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Claude",
+      "url": "https://mobbin.com/screens/cee9016f-f39a-4a08-b55d-aa25b66b84b0",
+      "note": "Incognito privacy empty",
+      "group": "settings",
+      "verdict": "adopt"
+    },
+    {
+      "app": "Claude",
+      "url": "https://mobbin.com/screens/f3b4e44f-c25f-4915-87f7-f8bdfdde0609",
+      "note": "Thread history + search",
+      "group": "lens",
+      "verdict": "adopt"
+    },
+    {
+      "app": "Moonly",
+      "url": "https://mobbin.com/screens/490a2f20-98cf-4fef-a109-e8be7040db20",
+      "note": "Compatibility landing",
+      "group": "bonds",
+      "verdict": "avoid-visual-adapt-structure"
+    },
+    {
+      "app": "Journal",
+      "url": "https://mobbin.com/screens/26ddbf34-3a78-4967-8550-f2157492d96f",
+      "note": "Calendar + entry insight",
+      "group": "journal",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Tinder",
+      "url": "https://mobbin.com/screens/7c552e9f-1f66-4fd1-97f8-cdaa08b265b2",
+      "note": "Cosmic spark bars locked",
+      "group": "bonds",
+      "verdict": "avoid"
+    },
+    {
+      "app": "Tiimo",
+      "url": "https://mobbin.com/screens/0cc0bb9a-f7a5-414b-9eb0-61e5a93d2782",
+      "note": "Weekly mood reflections",
+      "group": "journal",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Finimize",
+      "url": "https://mobbin.com/screens/5eb08061-e97f-46dd-980e-85db04d7db5b",
+      "note": "Delete account confirm",
+      "group": "settings",
+      "verdict": "adopt"
+    },
+    {
+      "app": "Fabric",
+      "url": "https://mobbin.com/screens/8fb686eb-6ecb-4c9c-b50b-43954b129929",
+      "note": "Restore purchase",
+      "group": "paywall",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Blinkist",
+      "url": "https://mobbin.com/screens/05c19142-a8e0-4097-bd36-ca2f4ab2d80e",
+      "note": "Settings restore/delete",
+      "group": "settings",
+      "verdict": "adopt"
+    },
+    {
+      "app": "Tiimo",
+      "url": "https://mobbin.com/screens/a70332c5-eb5a-4f01-8e14-1348848f6aae",
+      "note": "Settings restore + privacy",
+      "group": "settings",
+      "verdict": "adopt"
+    },
+    {
+      "app": "Coffee Meets Bagel",
+      "url": "https://mobbin.com/screens/5d6c98af-8be6-42e7-98e7-333cb3a339b2",
+      "note": "High-trust friction positioning",
+      "group": "onboarding",
+      "verdict": "adapt"
+    },
+    {
+      "app": "Pinterest",
+      "url": "https://mobbin.com/screens/a8e525f4-cc16-43a1-9e9d-2a414a545122",
+      "note": "Honest empty data state",
+      "group": "chart",
+      "verdict": "adopt"
+    },
+    {
+      "app": "L\u00f3vi",
+      "url": "https://mobbin.com/screens/89a3980e-0e72-4f40-9927-ea3c7b411e84",
+      "note": "Insight education cards",
+      "group": "daily",
+      "verdict": "adapt"
+    },
+    {
+      "app": "BFF",
+      "url": "https://mobbin.com/screens/ad69c5b3-03d2-4dba-bef4-37647adb2c27",
+      "note": "Relationship select large targets",
+      "group": "bonds",
+      "verdict": "adapt"
+    }
+  ],
+  "nummi_anti": "/nummi-ai IMG_3653-3664 local competitive audit"
+}

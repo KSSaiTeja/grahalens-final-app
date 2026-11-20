@@ -1,0 +1,29 @@
+{
+  "id": "chart-a",
+  "label": "Chart A — Hyderabad 1990-08-15 14:30 IST",
+  "system": "lahiri_whole_sign",
+  "toleranceDegrees": 0.5,
+  "input": {
+    "birthAt": "1990-08-15T14:30:00+05:30",
+    "lat": 17.385,
+    "lng": 78.4867,
+    "tz": "Asia/Kolkata",
+    "timeUnknown": false
+  },
+  "expected": {
+    "ayanamsa": 23.7222,
+    "lagnaApproximate": false,
+    "placements": {
+      "sun": 118.5631,
+      "moon": 51.3151,
+      "mercury": 145.5826,
+      "venus": 98.0539,
+      "mars": 27.5907,
+      "jupiter": 95.6502,
+      "saturn": 266.1463,
+      "rahu": 282.7486,
+      "ketu": 102.7486,
+      "lagna": 56.4734
+    }
+  }
+}

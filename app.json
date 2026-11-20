@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "grahalens",
+    "slug": "grahalens",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "grahalens",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F5F5F3"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.grahalens.app",
+      "usesAppleSignIn": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png",
+        "backgroundColor": "#9B8CDB"
+      },
+      "package": "com.grahalens.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-font",
+      "expo-localization",
+      "expo-apple-authentication",
+      "expo-sqlite",
+      [
+        "expo-notifications",
+        {
+          "color": "#9B8CDB",
+          "defaultChannel": "daily-sky"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

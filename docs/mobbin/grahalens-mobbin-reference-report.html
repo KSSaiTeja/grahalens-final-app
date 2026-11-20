@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grahalens · Mobbin Research Report</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #07080A;
+      --ink-elevated: #0E1014;
+      --ink-soft: #161922;
+      --hairline: rgba(243, 239, 231, 0.08);
+      --ivory: #F3EFE7;
+      --ivory-muted: rgba(243, 239, 231, 0.62);
+      --ivory-dim: rgba(243, 239, 231, 0.38);
+      --champagne: #C4A574;
+      --champagne-soft: rgba(196, 164, 116, 0.14);
+      --alert: #B85C4A;
+      --ok: #6B8F71;
+      --max: 920px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(196, 164, 116, 0.07), transparent 55%),
+        var(--ink);
+      color: var(--ivory);
+      font-family: "Manrope", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--champagne); text-decoration: none; border-bottom: 1px solid rgba(196, 164, 116, 0.35); }
+    a:hover { border-bottom-color: var(--champagne); }
+
+    .shell { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem 6rem; }
+
+    header.hero {
+      padding: 4.5rem 0 3rem;
+      border-bottom: 1px solid var(--hairline);
+      margin-bottom: 2.5rem;
+    }
+    .eyebrow {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      margin: 0 0 1.25rem;
+    }
+    h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      line-height: 1.1;
+      margin: 0 0 1rem;
+      letter-spacing: -0.02em;
+    }
+    h1 span.period { color: var(--champagne); }
+    .one-line {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--ivory-muted);
+      max-width: 38em;
+      margin: 0 0 1.75rem;
+      line-height: 1.45;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      color: var(--ivory-dim);
+      letter-spacing: 0.04em;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      border: 1px solid var(--hairline);
+      border-radius: 2px;
+      color: var(--ivory-muted);
+    }
+    .badge.wait { border-color: rgba(196, 164, 116, 0.45); color: var(--champagne); background: var(--champagne-soft); }
+
+    nav.toc {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+    nav.toc a {
+      display: block;
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--hairline);
+      border-bottom: 1px solid var(--hairline);
+      border-radius: 2px;
+      color: var(--ivory-muted);
+      font-size: 13px;
+      transition: background 160ms ease, color 160ms ease;
+    }
+    nav.toc a:hover { background: var(--ink-soft); color: var(--ivory); border-color: rgba(196, 164, 116, 0.25); }
+
+    section { margin-bottom: 3.5rem; scroll-margin-top: 1.5rem; }
+    h2 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 500;
+      font-size: 1.85rem;
+      margin: 0 0 1rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+    h3 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 500;
+      font-size: 1.35rem;
+      margin: 2rem 0 0.75rem;
+      color: var(--ivory);
+    }
+    h4 {
+      font-family: "Manrope", sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--champagne);
+      margin: 1.5rem 0 0.5rem;
+    }
+    p { color: var(--ivory-muted); margin: 0 0 1rem; }
+    ul, ol { color: var(--ivory-muted); padding-left: 1.2rem; margin: 0 0 1rem; }
+    li { margin-bottom: 0.4rem; }
+    strong { color: var(--ivory); font-weight: 600; }
+
+    .callout {
+      background: var(--ink-elevated);
+      border-left: 2px solid var(--champagne);
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .callout p { margin: 0; color: var(--ivory); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 1rem 0 1.5rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.7rem 0.65rem;
+      border-bottom: 1px solid var(--hairline);
+      vertical-align: top;
+    }
+    th {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ivory-dim);
+      font-weight: 500;
+    }
+    td { color: var(--ivory-muted); }
+    td:first-child { color: var(--ivory); font-weight: 500; }
+
+    .tag {
+      display: inline-block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.4rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .tag.adopt { background: rgba(107, 143, 113, 0.18); color: #9BB8A0; }
+    .tag.adapt { background: var(--champagne-soft); color: var(--champagne); }
+    .tag.avoid { background: rgba(184, 92, 74, 0.18); color: #D48A7C; }
+
+    .screen-card {
+      background: var(--ink-elevated);
+      border: 1px solid var(--hairline);
+      border-radius: 2px;
+      padding: 1.15rem 1.25rem;
+      margin-bottom: 0.85rem;
+    }
+    .screen-card h4 { margin-top: 0; }
+    .screen-card dl {
+      display: grid;
+      grid-template-columns: 7.5rem 1fr;
+      gap: 0.35rem 0.75rem;
+      margin: 0;
+      font-size: 13px;
+    }
+    .screen-card dt { color: var(--ivory-dim); font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding-top: 0.15rem; }
+    .screen-card dd { margin: 0; color: var(--ivory-muted); }
+
+    .prompt {
+      background: var(--ink-soft);
+      border: 1px solid var(--hairline);
+      border-radius: 2px;
+      padding: 1rem 1.15rem;
+      margin: 0.75rem 0 1.25rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--ivory-muted);
+      white-space: pre-wrap;
+    }
+    .prompt-title {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.2rem;
+      color: var(--ivory);
+      margin: 1.5rem 0 0.35rem;
+    }
+
+    .decisions {
+      counter-reset: dec;
+      list-style: none;
+      padding: 0;
+    }
+    .decisions li {
+      counter-increment: dec;
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.75rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--hairline);
+      margin: 0;
+    }
+    .decisions li::before {
+      content: counter(dec, decimal-leading-zero);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      color: var(--champagne);
+      padding-top: 0.15rem;
+    }
+    .decisions strong { display: block; margin-bottom: 0.25rem; }
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--hairline);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      color: var(--ivory-dim);
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 640px) {
+      .screen-card dl { grid-template-columns: 1fr; }
+      table { display: block; overflow-x: auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      nav.toc a { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <p class="eyebrow">Grahalens Observatory · Design Research</p>
+      <h1>Mobbin Research Report<span class="period">.</span></h1>
+      <p class="one-line">Reading this as: a private Jyotish observatory for people seeking decision clarity, combining daily sky, chart evidence, AI companion, journal, and bonds — premium, quiet, precise, non-gimmicky.</p>
+      <div class="meta">
+        <span class="badge wait">Awaiting approval · no UI edits</span>
+        <span>~127 flow screens · 18 discrete · Nummi anti-ref</span>
+        <span>Catalog: docs/mobbin/raw/catalog.json</span>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Sections">
+      <a href="#executive">1. Executive Design Read</a>
+      <a href="#reference">2. Reference Set</a>
+      <a href="#patterns">3. Patterns Converge</a>
+      <a href="#screens">4. Screen Decisions</a>
+      <a href="#visual">5. Visual System</a>
+      <a href="#plan">6. Design Plan</a>
+      <a href="#prompts">7. Prompt Pack</a>
+      <a href="#top10">Top 10 UX Decisions</a>
+    </nav>
+
+    <section id="executive">
+      <h2>1. Executive Design Read</h2>
+      <p>Grahalens is not a horoscope mill and not a spiritual chatbot with a chart bolted on. Brand Book ideology wins: dark ink, champagne accents under 5%, sacred computation, adult voice, hairlines over card soup.</p>
+
+      <div class="callout">
+        <p>Mobbin teaches jobs and IA. Nummi teaches gaps. Neither teaches the Observatory visual world — that stays Brand Book only.</p>
+      </div>
+
+      <h3>What Mobbin proved</h3>
+      <ul>
+        <li><strong>Calm / Headspace</strong> — one job per screen; monetize after a taste of value or a visible habit loop.</li>
+        <li><strong>Claude</strong> — quiet serif empty state, floating composer, privacy moments: closest peer for Lens craft.</li>
+        <li><strong>Moonly / Tinder Cosmic / Nummi</strong> — neon, early hard paywalls, vibes without ephemeris “why”: steal jobs, refuse the look.</li>
+        <li><strong>Headspace / Blinkist / Finimize</strong> — restore, legal, delete, subscription status in predictable lists (Jakob’s Law).</li>
+      </ul>
+
+      <h3>Nummi wedge (anti-reference)</h3>
+      <table>
+        <thead>
+          <tr><th>Gap</th><th>Grahalens opportunity</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Paywall before chart proof</td><td>Soft paywall after free Big Three + houses</td></tr>
+          <tr><td>Generic Good for / Watch out</td><td>Sky Weather + Muhurta with expandable rule “why”</td></tr>
+          <tr><td>Locks sign meanings behind Pro</td><td>Free chart literacy; gate Private depth</td></tr>
+          <tr><td>Dual chat entry (bar + FAB)</td><td>Single Lens; chart-grounded starters</td></tr>
+          <tr><td>Explore novelty zoo</td><td>Five instruments; no Cosmic Space cosmetics</td></tr>
+          <tr><td>Birth data buried in settings</td><td>Always inspectable + recompute</td></tr>
+        </tbody>
+      </table>
+
+      <h3>UX laws as reflexes</h3>
+      <table>
+        <thead><tr><th>Law</th><th>Application</th></tr></thead>
+        <tbody>
+          <tr><td>Hick’s</td><td>One primary CTA; ≤3 welcome pages; 2 plan choices</td></tr>
+          <tr><td>Fitts’s</td><td>52px primary CTA; 44×44 hits; full-width pickers</td></tr>
+          <tr><td>Miller’s</td><td>Chunk onboarding; Lens replies 2–4 short paragraphs</td></tr>
+          <tr><td>Gestalt / Proximity</td><td>Hairline regions; group weather + note</td></tr>
+          <tr><td>Doherty</td><td>Honest A10 stages; Orb feedback &lt;400ms</td></tr>
+          <tr><td>Jakob’s</td><td>Familiar settings; bottom composer; restore + legal</td></tr>
+          <tr><td>Zeigarnik</td><td>Unknown time + computing stages + daily return</td></tr>
+          <tr><td>Aesthetic-Usability</td><td>Quiet craft builds trust for AI + Jyotish</td></tr>
+          <tr><td>Pareto</td><td>Sky + Chart + Lens first</td></tr>
+          <tr><td>Von Restorff</td><td>Champagne only on active graha / CTA / wordmark</td></tr>
+          <tr><td>Postel / Tesler</td><td>Accept unknown time; complexity in ephemeris, not UI</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="reference">
+      <h2>2. Reference Set</h2>
+      <p>Legend: <span class="tag adopt">Adopt</span> keep pattern · <span class="tag adapt">Adapt</span> keep job, restyle · <span class="tag avoid">Avoid</span> anti-pattern.</p>
+
+      <h3>Onboarding / birth profile</h3>
+      <table>
+        <thead><tr><th>App</th><th>Source</th><th>Pattern</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Co–Star</td><td><a href="https://mobbin.com/flows/ca4b6afb-f05a-462f-b9a7-ab026b438d39">Onboarding flow</a></td><td>Identity → birth → account</td><td><span class="tag adapt">Adapt</span></td></tr>
+          <tr><td>Moonly</td><td><a href="https://mobbin.com/flows/992bc16a-8d0b-4961-8078-98e2e807a32a">Onboarding</a></td><td>Long personalize + neon</td><td><span class="tag avoid">Avoid</span> look · adapt steps</td></tr>
+          <tr><td>Calm</td><td><a href="https://mobbin.com/flows/38549b00-2fe8-4fd1-914b-13c4905db245">Onboard + Subscribe</a></td><td>Goal → personalize → pay</td><td><span class="tag adapt">Adapt</span></td></tr>
+          <tr><td>CMB</td><td><a href="https://mobbin.com/screens/5d6c98af-8be6-42e7-98e7-333cb3a339b2">Positioning</a></td><td>High-trust “not for everyone”</td><td><span class="tag adapt">Adapt</span></td></tr>
+          <tr><td>Nummi</td><td>nummi-ai/ IMG_3653–3655</td><td>Gender weight; fluff loading</td><td><span class="tag avoid">Avoid</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Daily home / sky</h3>
+      <table>
+        <thead><tr><th>App</th><th>Source</th><th>Pattern</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Calm</td><td><a href="https://mobbin.com/flows/e3f9f96b-d21f-400c-a94f-39bc53f8f40c">Discover / Home</a></td><td>One hero + day strip</td><td><span class="tag adapt">Adapt</span></td></tr>
+          <tr><td>Lóvi</td><td><a href="https://mobbin.com/screens/89a3980e-0e72-4f40-9927-ea3c7b411e84">Insights hub</a></td><td>Education + personalization</td><td><span class="tag adapt">Adapt</span></td></tr>
+          <tr><td>Nummi</td><td>IMG_3663–3664</td><td>Mood PRO + dual chat</td><td><span class="tag avoid">Avoid</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Chart / evidence</h3>
+      <table>
+        <thead><tr><th>App</th><th>Source</th><th>Pattern</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Moonly</td><td><a href="https://mobbin.com/flows/9ef67bb7-3a11-456f-8866-a38c8fa4b9ce">Calculate birth chart</a></td><td>Date/time/place → result</td><td><span class="tag adapt">Adapt</span></td></tr>
+          <tr><td>Pinterest</td><td><a href="https://mobbin.com/screens/a8e525f4-cc16-43a1-9e9d-2a414a545122">Insights empty</a></td><td>Honest empty + about data</td><td><span class="tag adopt">Adopt</span></td></tr>
+          <tr><td>Nummi</td><td>IMG_3659–3660</td><td>Locked meanings + streak</td><td><span class="tag avoid">Avoid</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3>AI companion / Lens</h3>
+      <table>
+        <thead><tr><th>App</th><th>Source</th><th>Pattern</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Claude</td><td><a href="https://mobbin.com/screens/ee3f2db4-079b-4034-8905-9938a40e8f0e">Dark empty</a></td><td>Serif greeting, quiet void</td><td><span class="tag adopt">Adopt</span></td></tr>
+          <tr><td>Claude</td><td><a href="https://mobbin.com/screens/e502b32e-3771-49cd-b0db-92eeff96922e">Composer</a></td><td>Chip + send</td><td><span class="tag adapt">Adapt</span></td></tr>
+          <tr><td>Claude</td><td><a href="https://mobbin.com/screens/f3b4e44f-c25f-4915-87f7-f8bdfdde0609">History</a></td><td>Search + manage</td><td><span class="tag adopt">Adopt</span></td></tr>
+          <tr><td>Claude</td><td><a href="https://mobbin.com/screens/cee9016f-f39a-4a08-b55d-aa25b66b84b0">Incognito</a></td><td>Privacy empty</td><td><span class="tag adopt">Adopt</span></td></tr>
+          <tr><td>ChatGPT</td><td><a href="https://mobbin.com/flows/86f171f6-2b2c-498b-a76d-fd21dd493a10">Chat + starters</a></td><td>Starter cards</td><td><span class="tag adapt">Adapt</span> · avoid purple Plus</td></tr>
+          <tr><td>Nummi</td><td>IMG_3661</td><td>Blank chat</td><td><span class="tag avoid">Avoid</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Journal / Bonds / Paywall / Settings</h3>
+      <table>
+        <thead><tr><th>Area</th><th>Key refs</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Journal</td><td><a href="https://mobbin.com/screens/26ddbf34-3a78-4967-8550-f2157492d96f">Apple Journal</a> · <a href="https://mobbin.com/flows/32f53762-649e-4ac9-b0dc-2bc8fd8cce70">Calm check-ins</a></td><td><span class="tag adapt">Adapt</span></td></tr>
+          <tr><td>Bonds</td><td><a href="https://mobbin.com/screens/490a2f20-98cf-4fef-a109-e8be7040db20">Moonly domains</a> · <a href="https://mobbin.com/screens/7c552e9f-1f66-4fd1-97f8-cdaa08b265b2">Tinder Cosmic</a></td><td>domains adapt · neon <span class="tag avoid">Avoid</span></td></tr>
+          <tr><td>Paywall</td><td><a href="https://mobbin.com/flows/ccf14439-4c45-4d56-b031-45173490cafe">Headspace</a> · Fabric <a href="https://mobbin.com/screens/8fb686eb-6ecb-4c9c-b50b-43954b129929">Restore</a></td><td><span class="tag adopt">Adopt</span> structure</td></tr>
+          <tr><td>Settings</td><td><a href="https://mobbin.com/screens/05c19142-a8e0-4097-bd36-ca2f4ab2d80e">Blinkist</a> · <a href="https://mobbin.com/screens/5eb08061-e97f-46dd-980e-85db04d7db5b">Finimize delete</a> · Headspace sub</td><td><span class="tag adopt">Adopt</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="patterns">
+      <h2>3. Patterns Top Apps Converge On</h2>
+      <ul>
+        <li><strong>Onboarding</strong> — one question per screen; skip only where Postel allows (birth time); proof before long quizzes.</li>
+        <li><strong>Daily habit</strong> — one hero instrument; secondary time-boxed actions; no second companion FAB.</li>
+        <li><strong>Chat</strong> — brand empty + 2–4 starters; bottom composer; searchable history; say what memory does.</li>
+        <li><strong>Subscription</strong> — free artifact first; two plans; yearly default + trial; restore + soft skip.</li>
+        <li><strong>Trust</strong> — Restore / Privacy / Terms / Delete / Export; destructive confirm with sub warning.</li>
+        <li><strong>Settings</strong> — grouped hairline lists; birth editable; appearance near top.</li>
+      </ul>
+    </section>
+
+    <section id="screens">
+      <h2>4. Grahalens-Specific UX Decisions</h2>
+
+      <div class="screen-card">
+        <h4>A2 Welcome</h4>
+        <dl>
+          <dt>Job</dt><dd>Position private observatory; one CTA into auth/guest.</dd>
+          <dt>Refs</dt><dd>CMB positioning; Calm/Co-Star carousel restraint.</dd>
+          <dt>Do</dt><dd>3 pages max — companion / sky / bonds; wordmark hero; adult copy.</dd>
+          <dt>Avoid</dt><dd>Emoji, nebula, feature laundry, Nummi crown energy.</dd>
+          <dt>Components</dt><dd>Carousel, progress dots, 52px primary CTA.</dd>
+          <dt>States</dt><dd>Reduced motion: no auto-advance.</dd>
+        </dl>
+      </div>
+
+      <div class="screen-card">
+        <h4>A6 / A7 / A8 Birth</h4>
+        <dl>
+          <dt>Job</dt><dd>Date → time (or unknown) → place geocode.</dd>
+          <dt>Refs</dt><dd>Moonly/Co-Star steps; Tinder incomplete Rising honesty.</dd>
+          <dt>Do</dt><dd>“I don’t know” equal weight; typeahead place; progress 1–3 of 3.</dd>
+          <dt>Avoid</dt><dd>Gender-as-astrology; silent 12:00; dead-end Search.</dd>
+          <dt>States</dt><dd>Invalid date; offline cities; no-results; permission deny.</dd>
+        </dl>
+      </div>
+
+      <div class="screen-card">
+        <h4>A10 Computing</h4>
+        <dl>
+          <dt>Job</dt><dd>Honest stages; build computation trust.</dd>
+          <dt>Refs</dt><dd>Pinterest “about this data”; Zeigarnik.</dd>
+          <dt>Do</dt><dd>resolve → natal → dasha → weather with real milestones.</dd>
+          <dt>Avoid</dt><dd>Nummi “Creating Your Space” fluff.</dd>
+          <dt>States</dt><dd>Error retry; timeout + offline fallback.</dd>
+        </dl>
+      </div>
+
+      <div class="screen-card">
+        <h4>A11 / P1 Paywall</h4>
+        <dl>
+          <dt>Job</dt><dd>Soft monetize after chart proof; clear Private value.</dd>
+          <dt>Refs</dt><dd>Headspace value→plans; Fabric restore.</dd>
+          <dt>Do</dt><dd>Big Three peek above plans; skip once; yearly + trial; entitlement grahalens_private.</dd>
+          <dt>Avoid</dt><dd>Feature laundry before proof; dark-pattern skip traps.</dd>
+          <dt>States</dt><dd>Purchasing; success; store unavailable (P4).</dd>
+        </dl>
+      </div>
+
+      <div class="screen-card">
+        <h4>S1 Sky home</h4>
+        <dl>
+          <dt>Job</dt><dd>Morning orientation instrument.</dd>
+          <dt>Refs</dt><dd>Calm single-hero; Brand Book §07.</dd>
+          <dt>Do</dt><dd>Wordmark + Sky Weather + Lens note + Muhurta strip.</dd>
+          <dt>Avoid</dt><dd>Lucky color/number; dual FAB; mood PRO gate first.</dd>
+          <dt>States</dt><dd>Skeleton; empty (no birth); error + retry.</dd>
+        </dl>
+      </div>
+
+      <div class="screen-card">
+        <h4>C1 Living chart</h4>
+        <dl>
+          <dt>Job</dt><dd>Sacred evidence + placements.</dd>
+          <dt>Refs</dt><dd>Moonly result job; Pinterest honesty.</dd>
+          <dt>Do</dt><dd>Skia Living Chart; free Big Three + houses; mono degrees.</dd>
+          <dt>Avoid</dt><dd>Locking identity meanings; purple wheel cosmetics.</dd>
+          <dt>States</dt><dd>Computing; unknown-time banner; selection sheet.</dd>
+        </dl>
+      </div>
+
+      <div class="screen-card">
+        <h4>L1 Lens companion</h4>
+        <dl>
+          <dt>Job</dt><dd>Grounded conversation with memory.</dd>
+          <dt>Refs</dt><dd>Claude quiet empty; ChatGPT starters (structure).</dd>
+          <dt>Do</dt><dd>Orb states; 3 chart-grounded starters; quota meter.</dd>
+          <dt>Avoid</dt><dd>Blank page; purple Plus; emoji tone.</dd>
+          <dt>States</dt><dd>Empty; thinking; error; quota GATE.</dd>
+        </dl>
+      </div>
+
+      <div class="screen-card">
+        <h4>B1 / B2 / B3 Bonds</h4>
+        <dl>
+          <dt>Job</dt><dd>Relationship clarity without snark.</dd>
+          <dt>Refs</dt><dd>Moonly domains; Tinder incomplete-data honesty.</dd>
+          <dt>Do</dt><dd>Free 1 bond; wizard mirrors birth; Talk/Care/Spark/Friction/Growth.</dd>
+          <dt>Avoid</dt><dd>Percentage soulmate carnival; neon glow.</dd>
+          <dt>States</dt><dd>Empty invite; computing; GATE bond #2; share card.</dd>
+        </dl>
+      </div>
+
+      <div class="screen-card">
+        <h4>R1 / R2 / R3 Atelier</h4>
+        <dl>
+          <dt>Job</dt><dd>Reflection linked to sky.</dd>
+          <dt>Refs</dt><dd>Apple Journal calendar; Calm check-ins.</dd>
+          <dt>Do</dt><dd>Hub → list → compose with weather-linked prompt.</dd>
+          <dt>Avoid</dt><dd>Past-life theater; emoji mood soup.</dd>
+          <dt>States</dt><dd>Empty; save error; Private gates Soul/Patterns.</dd>
+        </dl>
+      </div>
+
+      <div class="screen-card">
+        <h4>X1 Settings</h4>
+        <dl>
+          <dt>Job</dt><dd>Trust, control, subscription hygiene.</dd>
+          <dt>Refs</dt><dd>Blinkist / Tiimo / Headspace; Finimize delete.</dd>
+          <dt>Do</dt><dd>Birth near top; Restore; legal; delete + sub warning; Ink/Dawn.</dd>
+          <dt>Avoid</dt><dd>Burying chart; Upgrade as only hero.</dd>
+          <dt>States</dt><dd>Loading entitlement; restore pending.</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section id="visual">
+      <h2>5. Visual System Extraction</h2>
+      <h3>Steal (pattern only)</h3>
+      <ul>
+        <li>Quiet empty + serif greeting → Lens (Claude)</li>
+        <li>Floating composer → raised surface + champagne send</li>
+        <li>Habit hero → Sky Weather field (not streak circus)</li>
+        <li>Dual plan + restore → A11 / P1 / X8</li>
+        <li>Domain chips → Bonds without neon</li>
+        <li>Incomplete-data honesty → unknown-time banners</li>
+      </ul>
+      <h3>Never copy</h3>
+      <ul>
+        <li>Purple / indigo nebula</li>
+        <li>Co-Star meme snark as brand voice</li>
+        <li>Nummi terracotta card soup + dual FAB + early laundry paywall</li>
+        <li>Default Ionicons tabs · emoji UI · lucky widgets · card-soup dashboards</li>
+      </ul>
+      <h3>Brand Book lock-ins</h3>
+      <p>Ink <code>#07080A</code> / Dawn <code>#F3EFE7</code> · accent <code>#C4A574</code> &lt; 5% · Cormorant + Manrope + IBM Plex Mono · custom ObservatoryTabBar · Living Chart sacred · max 2 idle motions.</p>
+    </section>
+
+    <section id="plan">
+      <h2>6. Proposed Grahalens Design Plan</h2>
+      <ol>
+        <li>Theme tokens + ObservatoryTabBar + LensOrb</li>
+        <li>Auth/onboarding A1–A10 (proof path)</li>
+        <li>Soft A11 + P1–P5 billing state machine</li>
+        <li>S1 Sky + C1 Chart (free value)</li>
+        <li>L1 Lens + quota gate</li>
+        <li>Bonds B1–B3</li>
+        <li>Atelier R1–R3 / R7</li>
+        <li>Settings X* polish</li>
+      </ol>
+      <p><strong>Locked unchanged:</strong> Expo 54 + Router + TS strict · whole-sign Lahiri · entitlement <code>grahalens_private</code> · PLAN §2 state lanes · SCREENS inventory.</p>
+    </section>
+
+    <section id="prompts">
+      <h2>7. Implementation Prompt Pack</h2>
+      <p>Paste one per chat after approval. Each references Brand Book + SCREENS. Prefer ≤5 files.</p>
+
+      <p class="prompt-title">Prompt 1 — Tokens + TabBar + Orb</p>
+      <div class="prompt">Read docs/BRAND-BOOK.md and docs/SCREENS.md.
+Implement/confirm Observatory tokens in theme/tokens.ts (Ink+Dawn),
+components/brand/ObservatoryTabBar.tsx (5 tabs, champagne active, no Ionicons defaults),
+and components/brand/LensOrb.tsx (IDLE/READING/THINKING/SPEAKING/FOUND/ALERT + reduced motion).
+No purple, emoji, or UI kits. Verify: tsc / lint on touched files; visual check tab bar on S1 stub.
+Touch ≤5 files.</div>
+
+      <p class="prompt-title">Prompt 2 — Onboarding birth path A6–A10</p>
+      <div class="prompt">Read docs/BRAND-BOOK.md and docs/SCREENS.md (A6–A10).
+Ship birth date/time/place/confirm/computing with honest unknown-time, place typeahead,
+and A10 stages (resolve→natal→dasha→weather). No fluff “creating your space.”
+Verify: complete guest path to chart fixture; unknown time shows banner.
+Touch onboarding routes + shared birth components only.</div>
+
+      <p class="prompt-title">Prompt 3 — Soft paywall A11 + P1 shell</p>
+      <div class="prompt">Read docs/BRAND-BOOK.md, docs/SCREENS.md (A11, P1–P5), PLAN.md entitlements.
+Build soft welcome paywall after first chart (skip once) and full P1 with monthly/yearly,
+restore, legal; EXPO_PUBLIC_IAP_MODE=mock purchase unlocks grahalens_private.
+Show chart proof above plans. No feature-laundry-before-proof.
+Verify: mock purchase → entitlement true within 2s; skip once works.</div>
+
+      <p class="prompt-title">Prompt 4 — S1 Sky composition</p>
+      <div class="prompt">Read docs/BRAND-BOOK.md §07 and docs/SCREENS.md S1–S3.
+Implement Sky home: wordmark + Sky Weather field + one Lens note + Muhurta strip.
+No lucky color/number, no dual chat FAB, no card soup.
+Loading/empty/error required. Verify: screen render with fixture weather.</div>
+
+      <p class="prompt-title">Prompt 5 — C1 Living Chart free literacy</p>
+      <div class="prompt">Read docs/BRAND-BOOK.md (sacred chart) and docs/SCREENS.md C1–C2.
+Living Chart + placements; free Big Three + houses readable; never lock identity meanings.
+Mono degrees; unknown-time banner. Verify: natal vs fixture ≤0.5° if tests exist.</div>
+
+      <p class="prompt-title">Prompt 6 — L1 Lens quiet companion</p>
+      <div class="prompt">Read docs/BRAND-BOOK.md (Lens voice/orb) and docs/SCREENS.md L1–L6.
+Claude-quiet empty: Orb + Cormorant greeting + 3 chart-grounded starters + composer.
+Quota 5/day free → GATE paywall. No emoji, no purple Plus.
+Verify: starter sends message; quota blocks 6th; THINKING orb on request.</div>
+
+      <p class="prompt-title">Prompt 7 — Bonds B1–B3</p>
+      <div class="prompt">Read docs/BRAND-BOOK.md and docs/SCREENS.md B1–B7.
+Bond list, add wizard (mirrors birth), bond home with domains.
+Free 1 bond; #2+ GATE. Avoid neon % soulmate UI; use constellation + domains.
+Verify: add one bond; second opens paywall; empty state CTA.</div>
+
+      <p class="prompt-title">Prompt 8 — Settings X1 + delete/restore</p>
+      <div class="prompt">Read docs/BRAND-BOOK.md and docs/SCREENS.md X1–X14.
+Settings hub with birth edit, Ink/Dawn, subscription, restore, legal, delete confirm
+(warn if active sub), export Private-gated. Hairline groups, Jakob’s list IA.
+Verify: restore mock; delete confirm copy; appearance toggles theme.</div>
+    </section>
+
+    <section id="top10">
+      <h2>Strongest 10 UX Decisions</h2>
+      <ol class="decisions">
+        <li><strong>Proof before pay.</strong> Soft A11 after free Big Three + houses — never Nummi-style early laundry.</li>
+        <li><strong>Free chart literacy.</strong> Never lock core identity meanings; gate Private depth (Lens/Bonds/Soul/export).</li>
+        <li><strong>One Sky composition.</strong> Wordmark + weather + Lens note + Muhurta — no card soup or lucky widgets.</li>
+        <li><strong>Claude-quiet Lens.</strong> Serif empty, Orb states, 3 chart starters, honest quota — single entry, no dual FAB.</li>
+        <li><strong>Honest unknown time.</strong> Equal-weight “I don’t know”; degrade houses; banner forever until resolved.</li>
+        <li><strong>Staged computing.</strong> A10 milestones (resolve→natal→dasha→weather) — computation trust, not mystical fluff.</li>
+        <li><strong>Bonds as domains.</strong> Constellation + Talk/Care/Spark/Friction/Growth — no neon % soulmate theater.</li>
+        <li><strong>Habit without streak circus.</strong> Daily return via Sky Weather change; Atelier as calm check-in list.</li>
+        <li><strong>Jakob’s settings.</strong> Birth editable, Restore, legal, Finimize-grade delete+sub warning, Ink/Dawn.</li>
+        <li><strong>Observatory visual lock.</strong> Ink/champagne/hairlines/custom tab bar — Mobbin for UX only; Brand Book for look.</li>
+      </ol>
+    </section>
+
+    <footer>
+      Grahalens · docs/mobbin/grahalens-mobbin-reference-report.html<br />
+      Research complete. Stopped for approval before production screen edits.
+    </footer>
+  </div>
+</body>
+</html>

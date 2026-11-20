@@ -1,0 +1,186 @@
+# Maestro smoke — SCREENS §11 (Prompt 29).
+# Path: Welcome → Guest → Onboarding → Computing → Soft paywall Skip → Sky →
+# Chart planet → Lens message → Bonds add → Atelier journal → Settings →
+# Paywall mock purchase → Success → Soul unlocked.
+#
+# Requires: EXPO_PUBLIC_IAP_MODE=mock, app installed on simulator/device.
+# CI without Maestro: scripts/test-beta.mjs falls back to mock-IAP integration.
+
+appId: com.grahalens.app
+---
+- launchApp
+# --- Welcome ---
+- extendedWaitUntil:
+    visible:
+      id: "welcome-get-started"
+    timeout: 45000
+    optional: true
+- tapOn:
+    id: "welcome-get-started"
+    optional: true
+# --- Guest ---
+- extendedWaitUntil:
+    visible:
+      id: "guest-continue"
+    timeout: 15000
+    optional: true
+- tapOn:
+    id: "guest-continue"
+    optional: true
+# --- Onboarding: date → time → place → confirm → compute ---
+- extendedWaitUntil:
+    visible:
+      id: "onboarding-date"
+    timeout: 15000
+    optional: true
+- tapOn:
+    id: "onboarding-continue"
+    optional: true
+- extendedWaitUntil:
+    visible:
+      id: "onboarding-time"
+    timeout: 10000
+    optional: true
+- tapOn:
+    id: "onboarding-continue"
+    optional: true
+- extendedWaitUntil:
+    visible:
+      id: "onboarding-place"
+    timeout: 10000
+    optional: true
+- tapOn:
+    id: "city-hyd"
+    optional: true
+- tapOn:
+    id: "onboarding-continue"
+    optional: true
+- extendedWaitUntil:
+    visible:
+      id: "onboarding-confirm"
+    timeout: 10000
+    optional: true
+- tapOn:
+    id: "onboarding-compute"
+    optional: true
+- extendedWaitUntil:
+    visible:
+      id: "paywall-welcome"
+    timeout: 60000
+    optional: true
+# --- Soft paywall Skip ---
+- tapOn:
+    id: "paywall-welcome-skip"
+    optional: true
+# --- Sky ---
+- extendedWaitUntil:
+    visible:
+      id: "sky-home"
+    timeout: 20000
+# --- Chart → planet ---
+- tapOn:
+    id: "tab-chart"
+- extendedWaitUntil:
+    visible:
+      id: "chart-home"
+    timeout: 15000
+- tapOn:
+    id: "placement-sun"
+- tapOn:
+    id: "planet-open-full"
+    optional: true
+- extendedWaitUntil:
+    visible:
+      id: "planet-page"
+    timeout: 10000
+    optional: true
+- back
+- back
+# --- Lens message ---
+- tapOn:
+    id: "tab-lens"
+- extendedWaitUntil:
+    visible:
+      id: "lens-home"
+    timeout: 15000
+- tapOn:
+    id: "lens-composer-input"
+- inputText: "What does my Sun placement ask of today?"
+- tapOn:
+    id: "lens-send"
+# --- Bonds add (free path — first bond entry) ---
+- tapOn:
+    id: "tab-bonds"
+- extendedWaitUntil:
+    visible:
+      id: "bonds-home"
+    timeout: 15000
+- tapOn:
+    id: "bonds-add"
+- back
+# --- Atelier journal ---
+- tapOn:
+    id: "tab-atelier"
+- extendedWaitUntil:
+    visible:
+      id: "atelier-hub"
+    timeout: 15000
+- tapOn:
+    id: "atelier-journal"
+- extendedWaitUntil:
+    visible:
+      id: "journal-list"
+    timeout: 10000
+- tapOn:
+    id: "journal-new"
+- extendedWaitUntil:
+    visible:
+      id: "journal-new"
+    timeout: 10000
+- tapOn:
+    id: "journal-body"
+- inputText: "A quiet note beside the sky."
+- tapOn:
+    id: "journal-save"
+    optional: true
+- back
+- back
+# --- Settings → Paywall mock purchase ---
+- tapOn:
+    id: "tab-chart"
+- tapOn:
+    id: "chart-open-settings"
+- extendedWaitUntil:
+    visible:
+      id: "settings-hub"
+    timeout: 15000
+- tapOn:
+    id: "settings-row-plans"
+- extendedWaitUntil:
+    visible:
+      id: "paywall-plans"
+    timeout: 20000
+- tapOn:
+    id: "paywall-purchase"
+- extendedWaitUntil:
+    visible:
+      id: "paywall-success"
+    timeout: 20000
+- tapOn:
+    id: "paywall-success-enter"
+# --- Soul unlocked ---
+- tapOn:
+    id: "tab-atelier"
+- tapOn:
+    id: "atelier-soul"
+- extendedWaitUntil:
+    visible:
+      id: "soul-unlocked"
+    timeout: 20000
+# --- Lens unlimited chip after Private ---
+- tapOn:
+    id: "tab-lens"
+- extendedWaitUntil:
+    visible:
+      id: "lens-unlimited"
+    timeout: 15000

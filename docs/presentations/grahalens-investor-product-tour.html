@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Grahalens — The Story (Investor Narrative)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #0f1419;
+    --ink-soft: #3a4250;
+    --paper: #f6f1e8;
+    --paper-deep: #ebe3d4;
+    --line: #d4c9b5;
+    --copper: #9a5b2f;
+    --copper-soft: #f0dfc8;
+    --teal: #1c5c4c;
+    --rose: #7a3b3b;
+    --card: #fffcf7;
+    --shadow: 0 22px 60px rgba(15, 20, 25, 0.09);
+    --max: 880px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background:
+      radial-gradient(900px 500px at 0% 0%, #fff5e4 0%, transparent 50%),
+      radial-gradient(800px 480px at 100% 8%, #e8efe9 0%, transparent 45%),
+      var(--paper);
+    font-family: Outfit, system-ui, sans-serif;
+    font-size: 17.5px;
+    line-height: 1.62;
+  }
+  h1, h2, h3, h4 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 0.4em;
+  }
+  p { margin: 0 0 1em; }
+  a { color: var(--copper); }
+  em.story { font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: 1.15em; color: var(--ink-soft); }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px 96px; }
+
+  .cover {
+    min-height: 88vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 48px 24px 56px;
+    border-bottom: 1px solid var(--line);
+    background:
+      linear-gradient(180deg, transparent 20%, rgba(246,241,232,0.95) 75%),
+      radial-gradient(ellipse 80% 60% at 70% 20%, #dfc9a8 0%, transparent 60%);
+  }
+  .cover-inner { max-width: var(--max); margin: 0 auto; width: 100%; }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--copper);
+    margin-bottom: 20px;
+  }
+  .cover h1 {
+    font-size: clamp(3rem, 8vw, 4.8rem);
+    max-width: 11ch;
+    margin-bottom: 18px;
+  }
+  .cover .lede {
+    font-size: 1.25rem;
+    max-width: 36ch;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+  .pull {
+    border-left: 3px solid var(--copper);
+    padding: 4px 0 4px 18px;
+    margin: 28px 0;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.45rem;
+    font-style: italic;
+    line-height: 1.35;
+    color: var(--ink-soft);
+    max-width: 34ch;
+  }
+
+  .toc {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    backdrop-filter: blur(14px);
+    background: rgba(246, 241, 232, 0.9);
+    border-bottom: 1px solid var(--line);
+  }
+  .toc-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 10px 24px;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+  }
+  .toc a {
+    flex: 0 0 auto;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 999px;
+  }
+  .toc a:hover { background: var(--card); }
+
+  chapter, section {
+    display: block;
+    padding-top: 64px;
+    scroll-margin-top: 56px;
+  }
+  .chap-num {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--copper);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .chap-title { font-size: clamp(2rem, 4vw, 2.7rem); max-width: 16ch; }
+  .chap-lead { color: var(--ink-soft); max-width: 52ch; font-size: 1.05rem; }
+
+  .persona-grid {
+    display: grid;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  @media (min-width: 760px) {
+    .persona-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .persona {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 22px 22px 20px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .persona::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--copper);
+  }
+  .persona.arjun::before { background: var(--teal); }
+  .persona.priya::before { background: var(--rose); }
+  .persona .who {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--copper);
+    margin-bottom: 6px;
+  }
+  .persona.arjun .who { color: var(--teal); }
+  .persona.priya .who { color: var(--rose); }
+  .persona h3 { font-size: 1.7rem; }
+  .persona .job { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 12px; }
+  .persona ul {
+    margin: 0;
+    padding-left: 1.1em;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+  .persona li { margin: 0.35em 0; }
+  .want {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+    font-size: 0.95rem;
+  }
+  .want strong { color: var(--ink); }
+
+  .scene {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 24px 24px 20px;
+    margin: 0 0 20px;
+    box-shadow: var(--shadow);
+  }
+  .scene-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--copper);
+    margin-bottom: 8px;
+  }
+  .scene h3 { font-size: 1.55rem; }
+  .narrate { color: var(--ink-soft); }
+  .on-phone {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+  }
+  .on-phone h4 {
+    font-family: Outfit, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+  .bits {
+    display: grid;
+    gap: 8px;
+  }
+  @media (min-width: 640px) {
+    .bits { grid-template-columns: 1fr 1fr; }
+  }
+  .bit {
+    background: var(--paper-deep);
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 0.92rem;
+  }
+  .bit strong { display: block; margin-bottom: 2px; font-size: 0.95rem; }
+  .bit span { color: var(--ink-soft); font-size: 0.88rem; }
+
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 999px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge.free { background: #e4f0ea; color: var(--teal); }
+  .badge.soft { background: var(--copper-soft); color: var(--copper); }
+  .badge.gate { background: #f3e4e0; color: var(--rose); }
+  .badge.private { background: #e8e4f4; color: #4a3d6e; }
+
+  .logic-grid {
+    display: grid;
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .logic {
+    background: var(--ink);
+    color: #f6f1e8;
+    border-radius: 20px;
+    padding: 20px 22px;
+  }
+  .logic h3 {
+    color: #fff;
+    font-size: 1.35rem;
+  }
+  .logic p { color: #c9c0b0; margin-bottom: 0.55em; }
+  .logic p:last-child { margin-bottom: 0; }
+  .logic .plain {
+    color: #f0dfc8;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+  .two {
+    display: grid;
+    gap: 14px;
+  }
+  @media (min-width: 720px) {
+    .two { grid-template-columns: 1fr 1fr; }
+  }
+  .soft-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px 18px;
+  }
+  .soft-card h4 { font-size: 1.25rem; }
+  .soft-card p, .soft-card ul { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
+  .soft-card ul { padding-left: 1.1em; }
+  .soft-card li { margin: 0.3em 0; }
+
+  .timeline {
+    margin: 28px 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  .timeline li {
+    position: relative;
+    padding: 0 0 22px 28px;
+    border-left: 2px solid var(--line);
+    color: var(--ink-soft);
+  }
+  .timeline li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--copper);
+    box-shadow: 0 0 0 4px var(--paper);
+  }
+  .timeline strong { color: var(--ink); display: block; margin-bottom: 2px; }
+
+  .share-box {
+    background: linear-gradient(145deg, #1a222c, #0f1419);
+    color: #f6f1e8;
+    border-radius: 24px;
+    padding: 28px 24px;
+    margin-top: 20px;
+  }
+  .share-box h2 { color: #fff; }
+  .share-box p { color: #b8b0a2; }
+  .share-box code {
+    display: block;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin: 8px 0 14px;
+    color: #f0dfc8;
+    font-size: 0.9rem;
+    word-break: break-all;
+  }
+
+  footer {
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .scene, .persona, .logic {
+      animation: rise 0.7s ease both;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-inner">
+    <div class="eyebrow">Investor narrative · Grahalens</div>
+    <h1>See through the sky.</h1>
+    <p class="lede">
+      This is not a feature list. It is a morning, an argument, a quiet unlock —
+      three people meeting an observatory that computes before it speaks.
+    </p>
+    <div class="pull">
+      “I don’t want another horoscope. I want something that knows my chart is real.”
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Chapters">
+  <div class="toc-inner">
+    <a href="#people">People</a>
+    <a href="#maya">Maya’s morning</a>
+    <a href="#arjun">Arjun’s bond</a>
+    <a href="#priya">Priya upgrades</a>
+    <a href="#brain">How it thinks</a>
+    <a href="#logic">What’s built</a>
+    <a href="#map">Full map</a>
+    <a href="#demo">Try it</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- PEOPLE -->
+  <section id="people">
+    <div class="chap-num">Chapter 0</div>
+    <h2 class="chap-title">Meet the people</h2>
+    <p class="chap-lead">
+      Investors remember faces, not tabs. These three are why Grahalens exists.
+      As you read, imagine them holding the phone — not a dashboard.
+    </p>
+
+    <div class="persona-grid">
+      <article class="persona">
+        <div class="who">Persona · Private seeker</div>
+        <h3>Maya, 29</h3>
+        <p class="job">Product designer · Bangalore / remote · opens the app at 7:40 before Slack</p>
+        <ul>
+          <li>Tired of sun-sign fluff and aggressive “upgrade now” popups</li>
+          <li>Keeps birth time approximate — doesn’t want fake precision</li>
+          <li>Wants a quiet companion that remembers last week’s conversation</li>
+        </ul>
+        <p class="want"><strong>Job to be done:</strong> “Orient me for today — honestly — in under a minute.”</p>
+      </article>
+
+      <article class="persona arjun">
+        <div class="who">Persona · Relationship reader</div>
+        <h3>Arjun, 34</h3>
+        <p class="job">Founder · Mumbai · adds his partner’s birth after a hard weekend</p>
+        <ul>
+          <li>Tried snarky friend apps; felt cheap</li>
+          <li>Wants Talk / Care / Friction in plain language, not roast culture</li>
+          <li>Will pay if a second relationship (sibling, co-founder) unlocks cleanly</li>
+        </ul>
+        <p class="want"><strong>Job to be done:</strong> “Help me see how two charts braid — without humiliation.”</p>
+      </article>
+    </div>
+
+    <article class="persona priya" style="max-width:100%;">
+      <div class="who">Persona · Converts to Private</div>
+      <h3>Priya, 31</h3>
+      <p class="job">Therapist-in-training · used free Lens for five days, hit the sixth message mid-crisis</p>
+      <ul>
+        <li>Free tier felt real — so the paywall doesn’t feel like a trick</li>
+        <li>Wants Soul Cartography and unlimited conversation once she’s in</li>
+        <li>Cares that cancel lives in the App Store, disclosed upfront</li>
+      </ul>
+      <p class="want"><strong>Job to be done:</strong> “Let me go deeper when I’m ready — without shame.”</p>
+    </article>
+  </section>
+
+  <!-- MAYA -->
+  <section id="maya">
+    <div class="chap-num">Chapter 1</div>
+    <h2 class="chap-title">Maya’s first morning</h2>
+    <p class="chap-lead">
+      She does not create an account. She taps <em class="story">Continue as guest</em>.
+      The observatory lives on her phone first. That is intentional.
+    </p>
+
+    <article class="scene">
+      <div class="scene-tag">Scene · Welcome</div>
+      <h3>Three quiet promises <span class="badge free">Free</span></h3>
+      <p class="narrate">
+        A short carousel: a companion that remembers, a sky that is personal,
+        bonds between charts. One button. No spam. Maya thinks —
+        <em class="story">okay, this feels adult.</em>
+      </p>
+      <div class="on-phone">
+        <h4>On her phone</h4>
+        <div class="bits">
+          <div class="bit"><strong>Welcome carousel</strong><span>Companion · Sky · Bonds</span></div>
+          <div class="bit"><strong>Wordmark + Lens Orb</strong><span>The soft “heartbeat” of the companion</span></div>
+          <div class="bit"><strong>Guest path</strong><span>No email required to begin</span></div>
+          <div class="bit"><strong>Sign-in waiting</strong><span>Magic link when she’s ready later</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene">
+      <div class="scene-tag">Scene · Birth facts</div>
+      <h3>She tells the sky who she is <span class="badge free">Free</span></h3>
+      <p class="narrate">
+        Date. Time — she chooses <em class="story">I don’t know</em>. Place from an offline city list.
+        Confirm. Then Computing: not a black-box spinner, but honest stages —
+        resolve → natal → dasha → weather. She watches the work happen.
+      </p>
+      <div class="on-phone">
+        <h4>On her phone</h4>
+        <div class="bits">
+          <div class="bit"><strong>Date / Time / Place / Confirm</strong><span>Birth wizard with progress chrome</span></div>
+          <div class="bit"><strong>Unknown time</strong><span>Lagna marked approximate — never faked</span></div>
+          <div class="bit"><strong>Computing ritual</strong><span>Visible stages + Orb presence</span></div>
+          <div class="bit"><strong>Soft welcome paywall</strong><span>Invite to Private — skip once</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene">
+      <div class="scene-tag">Scene · Soft paywall</div>
+      <h3>An invitation, not a trap <span class="badge soft">Soft</span></h3>
+      <p class="narrate">
+        She sees her Big Three peek from the real chart. Monthly and Yearly.
+        Legal footer. Restore. And Skip. She skips. The free observatory opens.
+        No countdown. No guilt.
+      </p>
+      <div class="on-phone">
+        <h4>On her phone</h4>
+        <div class="bits">
+          <div class="bit"><strong>Big Three Peek</strong><span>Sun / Moon / Rising from compute</span></div>
+          <div class="bit"><strong>Plan cards</strong><span>Yearly trial badge · Monthly</span></div>
+          <div class="bit"><strong>Skip once</strong><span>Enter Sky without paying</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene">
+      <div class="scene-tag">Scene · Sky</div>
+      <h3>“What kind of day is this — for me?” <span class="badge free">Free</span></h3>
+      <p class="narrate">
+        Clarity runs high. Friction gathers after dusk. A muhurta strip offers a
+        Connect window. A short Lens note. A peek into her Living Chart.
+        This is not a newspaper horoscope. It was computed from <em>her</em> birth.
+      </p>
+      <div class="on-phone">
+        <h4>On her phone</h4>
+        <div class="bits">
+          <div class="bit"><strong>Sky Weather Field</strong><span>Clarity · Pressure · Friction · Opening</span></div>
+          <div class="bit"><strong>Muhurta Strip</strong><span>Best windows inside today</span></div>
+          <div class="bit"><strong>Lens Note Card</strong><span>Grounded daily line</span></div>
+          <div class="bit"><strong>Chart Peek</strong><span>Jump into the instrument panel</span></div>
+          <div class="bit"><strong>Weather detail / Day archive</strong><span>Why + past 7 free days</span></div>
+          <div class="bit"><strong>Inbox</strong><span>Today’s notes in one list</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene">
+      <div class="scene-tag">Scene · Chart</div>
+      <h3>She opens the instrument <span class="badge free">Free</span></h3>
+      <p class="narrate">
+        Living Chart wheel. Placement list she can actually read. Banner: time
+        unknown, Lagna approximate. She taps the Sun. Degrees. Sign. House.
+        Then the Dasha ribbon — which life chapter is she in? This is calculator-grade,
+        without looking like a PDF from 2009.
+      </p>
+      <div class="on-phone">
+        <h4>On her phone</h4>
+        <div class="bits">
+          <div class="bit"><strong>Living Chart + Placement List</strong><span>9 grahas + Lagna</span></div>
+          <div class="bit"><strong>Planet pages</strong><span>One graha, fully</span></div>
+          <div class="bit"><strong>Dasha Ribbon</strong><span>Maha / antar caret on “now”</span></div>
+          <div class="bit"><strong>Deep read (soft)</strong><span>First paragraph free</span></div>
+          <div class="bit"><strong>Transits · Aspects</strong><span>Day choreography + table</span></div>
+          <div class="bit"><strong>Cosmic profile (soft)</strong><span>“Who you are” summary</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene">
+      <div class="scene-tag">Scene · Lens</div>
+      <h3>She asks something real <span class="badge free">Free · 5/day</span></h3>
+      <p class="narrate">
+        “Why do conversations feel sharp after dusk?” The Orb thinks. The reply
+        cites her chart — not a random ChatGPT vibe. Quota chip: <em>1 of 5 free today</em>.
+        Memories can pin what matters. If the AI invents a planet, grounding
+        rejects it. Quieter mode still tells the truth.
+      </p>
+      <div class="on-phone">
+        <h4>On her phone</h4>
+        <div class="bits">
+          <div class="bit"><strong>Lens Orb + Composer</strong><span>States: idle → thinking → speaking</span></div>
+          <div class="bit"><strong>Thread Messages</strong><span>Conversation that persists</span></div>
+          <div class="bit"><strong>Quota Chip</strong><span>Fair free limit → upgrade</span></div>
+          <div class="bit"><strong>Starters · Memories</strong><span>Prompts + pin/delete</span></div>
+          <div class="bit"><strong>Offline lock</strong><span>Can’t send without network</span></div>
+          <div class="bit"><strong>6th message gate</strong><span>Calm paywall sheet</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="scene">
+      <div class="scene-tag">Scene · Atelier</div>
+      <h3>She writes beside the sky <span class="badge free">Free</span></h3>
+      <p class="narrate">
+        A weather-linked prompt. A mood. A note that works offline. Check-in
+        feeds memory. Soul Cartography shows a preview — full portrait waits
+        for Private. Pattern Thread waits too. Free is useful. Depth is earned.
+      </p>
+      <div class="on-phone">
+        <h4>On her phone</h4>
+        <div class="bits">
+          <div class="bit"><strong>Hub tiles</strong><span>Journal · Soul · Patterns · Check-in</span></div>
+          <div class="bit"><strong>Weather Prompt + Mood</strong><span>Compose with sky context</span></div>
+          <div class="bit"><strong>Soul (gated)</strong><span>Preview free · full Private</span></div>
+          <div class="bit"><strong>Pattern Thread (gated)</strong><span>Weekly weave from journal + weather</span></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ARJUN -->
+  <section id="arjun">
+    <div class="chap-num">Chapter 2</div>
+    <h2 class="chap-title">Arjun adds a bond</h2>
+    <p class="chap-lead">
+      Same observatory, different job. He is not here for today’s muhurta.
+      He is here because a relationship needs a clearer map.
+    </p>
+
+    <article class="scene">
+      <div class="scene-tag">Scene · Bonds</div>
+      <h3>One person in his sky — free <span class="badge free">Free · 1 bond</span></h3>
+      <p class="narrate">
+        Empty state first: <em class="story">“No one in your sky yet.”</em>
+        He adds his partner — name, date, time, place, compute.
+        Synastry runs. Talk · Care · Spark · Friction · Growth.
+        A constellation. A share card without snark. When he tries to add his
+        co-founder next, the gate is clear: Private opens every braid.
+      </p>
+      <div class="on-phone">
+        <h4>On his phone</h4>
+        <div class="bits">
+          <div class="bit"><strong>Bond list + Empty State</strong><span>Honest invite to add first</span></div>
+          <div class="bit"><strong>Add wizard</strong><span>Same care as own birth</span></div>
+          <div class="bit"><strong>Bond home</strong><span>Constellation peek + domain rows</span></div>
+          <div class="bit"><strong>Domain deep read (soft)</strong><span>Lead free · rest Private</span></div>
+          <div class="bit"><strong>Share Card</strong><span>Screenshot-ready, calm</span></div>
+          <div class="bit"><strong>Bond #2 gate</strong><span>Paywall reason: bond_limit</span></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="pull">
+      Co-Star energy without the roast. Nummi depth without the cold PDF.
+      Arjun feels both — and neither clone.
+    </div>
+  </section>
+
+  <!-- PRIYA -->
+  <section id="priya">
+    <div class="chap-num">Chapter 3</div>
+    <h2 class="chap-title">Priya crosses the threshold</h2>
+    <p class="chap-lead">
+      Free worked. So Private feels like more observatory — not a ransom.
+    </p>
+
+    <article class="scene">
+      <div class="scene-tag">Scene · Paywall</div>
+      <h3>She hits the sixth Lens message <span class="badge gate">Gate</span></h3>
+      <p class="narrate">
+        A sheet: you’ve used today’s five free messages. See Private plans.
+        Yearly with 3-day trial. Legal disclosure. She purchases (in demo: mock store —
+        same unlock path as real RevenueCat). Success. Soul opens. Lens unlimited.
+        Bonds unlimited. Archive unlimited. Export appears in Settings.
+      </p>
+      <div class="on-phone">
+        <h4>On her phone</h4>
+        <div class="bits">
+          <div class="bit"><strong>Gate sheet</strong><span>Reasoned, calm CTA</span></div>
+          <div class="bit"><strong>Full plans</strong><span>Price cards · restore · legal</span></div>
+          <div class="bit"><strong>Success</strong><span>Enter observatory</span></div>
+          <div class="bit"><strong>Unavailable</strong><span>Honest if store is down</span></div>
+          <div class="bit"><strong>Subscription settings</strong><span>Status · manage in store</span></div>
+          <div class="bit"><strong>Lock Glyph gone</strong><span>Soul · Patterns · deep reads</span></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="two" style="margin-top:8px;">
+      <div class="soft-card">
+        <h4>Free stays meaningful</h4>
+        <ul>
+          <li>Full natal + Living Chart</li>
+          <li>Sky Weather + Muhurta</li>
+          <li>5 Lens / day · 1 Bond</li>
+          <li>Journal + check-in · 7-day archive</li>
+        </ul>
+      </div>
+      <div class="soft-card">
+        <h4>Private is the full observatory</h4>
+        <ul>
+          <li>Unlimited Lens + Bonds</li>
+          <li>Soul Cartography + Pattern Thread</li>
+          <li>Full deep reads · unlimited archive</li>
+          <li>JSON export · ~$7.99/mo or ~$49.99/yr</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAIN -->
+  <section id="brain">
+    <div class="chap-num">Chapter 4</div>
+    <h2 class="chap-title">How the observatory thinks</h2>
+    <p class="chap-lead">
+      Simple words. This is the logic Maya never sees — but trusts when the
+      language stays honest.
+    </p>
+
+    <div class="logic-grid">
+      <div class="logic">
+        <p class="plain">Compute first. Speak second.</p>
+        <h3>1 · Birth chart math (on the phone)</h3>
+        <p>From date, time, and place, the app places nine grahas and Lagna using Lahiri whole-sign houses. Numbers are tested against fixtures (within half a degree). The AI is not allowed to invent planets.</p>
+      </div>
+      <div class="logic">
+        <h3>2 · Timing &amp; weather</h3>
+        <p><strong>Dasha</strong> = which life chapter you’re in (maha / antar).</p>
+        <p><strong>Sky Weather</strong> = four scores for today from transits to your chart: clarity, pressure, friction, opening.</p>
+        <p><strong>Muhurta</strong> = suggested windows inside the civil day.</p>
+      </div>
+      <div class="logic">
+        <h3>3 · Lens + grounding</h3>
+        <p>Your question goes out with chart facts and memories. If the model claims “Mars in Leo” and your Mars isn’t there, that line is rejected. Quieter mode still cites real dasha.</p>
+      </div>
+      <div class="logic">
+        <h3>4 · Bonds</h3>
+        <p>Two charts → five domains (Talk, Care, Spark, Friction, Growth) with reasons. Visual constellation. Free: one relationship. Private: many.</p>
+      </div>
+      <div class="logic">
+        <h3>5 · Journal → memory → patterns</h3>
+        <p>Write offline. Check-ins feed memory. Weekly Pattern Thread (Private) braids moods with sky weather. Soul Cartography builds signatures from the chart.</p>
+      </div>
+      <div class="logic">
+        <h3>6 · Private unlock</h3>
+        <p>One entitlement: <strong>grahalens_private</strong>. Mock store for demos. Real store via RevenueCat when keys exist. Cancel lives in Apple/Google — disclosed on the paywall.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGIC STATUS -->
+  <section id="logic">
+    <div class="chap-num">Chapter 5</div>
+    <h2 class="chap-title">What’s built vs what’s cloud</h2>
+    <p class="chap-lead">
+      Investors ask: “Is the backend done?” Honest answer — in the story’s language.
+    </p>
+
+    <div class="two">
+      <div class="soft-card">
+        <h4>The brain is on the phone — done</h4>
+        <p style="margin-bottom:10px;">For guest, demo, and daily use, the product logic is implemented:</p>
+        <ul>
+          <li>Chart, dasha, weather, muhurta</li>
+          <li>Lens, memory, grounding</li>
+          <li>Bonds, journal, soul, patterns</li>
+          <li>Quotas, paywalls, mock purchase</li>
+          <li>Every screen on the map</li>
+        </ul>
+      </div>
+      <div class="soft-card">
+        <h4>Cloud is optional scaffolding — partial</h4>
+        <p style="margin-bottom:10px;">Supabase schema + auth exist. Multi-device sync of journal/bonds is not end-to-end yet. Empty keys = guest mode. That’s a feature for privacy-first seekers like Maya.</p>
+        <ul>
+          <li>No separate “API server” for astrology math</li>
+          <li>Store IAP needs RevenueCat keys for TestFlight store mode</li>
+          <li>Push tokens / full sync = next ops layer</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pull" style="margin-top:28px;">
+      Translation: the product works as an observatory today.
+      Cloud sync is the sequel — not the missing plot.
+    </div>
+  </section>
+
+  <!-- FULL MAP -->
+  <section id="map">
+    <div class="chap-num">Chapter 6</div>
+    <h2 class="chap-title">The full journey map</h2>
+    <p class="chap-lead">Same story, compressed — so you can pitch the arc in sixty seconds.</p>
+
+    <ul class="timeline">
+      <li><strong>Splash → Welcome → Guest or Sign-in</strong> Enter without friction.</li>
+      <li><strong>Birth → Computing → Soft paywall (skip once)</strong> Chart before chat.</li>
+      <li><strong>Sky</strong> Daily climate + muhurta + note (Maya).</li>
+      <li><strong>Chart</strong> Living wheel, dasha, transits, aspects, profile.</li>
+      <li><strong>Lens</strong> Grounded companion · 5 free/day · memories.</li>
+      <li><strong>Bonds</strong> One free braid · domains · share (Arjun).</li>
+      <li><strong>Atelier</strong> Journal · check-in · Soul/Patterns gated.</li>
+      <li><strong>Gate → Plans → Success</strong> Private unlock (Priya).</li>
+      <li><strong>Settings</strong> Birth edit, appearance, legal, restore, wipe, export.</li>
+    </ul>
+
+    <div class="scene">
+      <div class="scene-tag">Always with them</div>
+      <h3>Global helpers</h3>
+      <p class="narrate">Five-tab bar (Sky · Chart · Lens · Bonds · Atelier). Offline banner. Billing hold banner. Quota chip. Lock glyph on gated rows. Honest “not found.” No fake planets. No “coming soon” dead ends.</p>
+    </div>
+  </section>
+
+  <!-- DEMO -->
+  <section id="demo">
+    <div class="chap-num">Chapter 7</div>
+    <h2 class="chap-title">Walk it with someone</h2>
+    <p class="chap-lead">Let Maya’s path be the live demo. Ten minutes. One phone.</p>
+
+    <ol style="color:var(--ink-soft); padding-left:1.2em;">
+      <li>Welcome → Continue as guest</li>
+      <li>Birth facts → watch Computing</li>
+      <li>Skip soft paywall → Sky</li>
+      <li>Open one muhurta · one planet · one Lens question</li>
+      <li>Add one Bond · open a domain</li>
+      <li>Write a journal note · peek Soul (see the gate)</li>
+      <li>Mock purchase → Success → Soul unlocks</li>
+    </ol>
+
+    <div class="share-box">
+      <h2>Expo Go (friend / investor)</h2>
+      <p>Keep Expo running on the builder’s Mac. Friend installs Expo Go (SDK 54) and opens:</p>
+      <code>exp://b_5x-q8-kssaiteja-8081.exp.direct</code>
+      <p>If that link expires, restart with <code>npx expo start --tunnel</code> and share the new URL. Mock IAP stays on for demos.</p>
+      <p style="margin-bottom:0;">Present this page beside the phone — story in one hand, product in the other.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>Grahalens</strong> — a private observatory that computes before it speaks.</p>
+    <p>Narrative tour for investors · Personas: Maya · Arjun · Priya · File: <code>docs/presentations/grahalens-investor-product-tour.html</code></p>
+  </footer>
+</main>
+
+</body>
+</html>
